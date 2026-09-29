@@ -32,7 +32,7 @@ export const DateMotif = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-40px" }}
-      className="relative w-full max-w-[240px] mx-auto py-4 flex flex-col items-center justify-center select-none gpu-layer"
+      className="relative w-full max-w-[240px] mx-auto py-4 flex flex-col items-center justify-center select-none"
     >
       <svg
         viewBox="0 0 260 380"

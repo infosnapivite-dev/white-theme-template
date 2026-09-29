@@ -31,7 +31,7 @@ export const LoveTypography = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="relative w-full max-w-[290px] mx-auto py-2 flex items-center justify-center select-none gpu-layer"
+      className="relative w-full max-w-[290px] mx-auto py-2 flex items-center justify-center select-none"
     >
       <svg
         viewBox="0 0 330 520"

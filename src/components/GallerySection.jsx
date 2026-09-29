@@ -44,7 +44,7 @@ export const GallerySection = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
-      className="relative w-full pt-16 pb-20 sm:pt-20 sm:pb-24 px-5 min-h-[580px] flex flex-col justify-center bg-white gpu-layer overflow-hidden"
+      className="relative w-full pt-16 pb-20 sm:pt-20 sm:pb-24 px-5 min-h-[580px] flex flex-col justify-center bg-white overflow-hidden"
     >
       {/* Vertical Cursive Margin Text on Right Edge */}
       <motion.div

@@ -39,7 +39,7 @@ export const InvitationSection = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-40px" }}
-      className="relative w-full pt-14 pb-8 px-6 flex flex-col items-center justify-center bg-white text-center gpu-layer select-none"
+      className="relative w-full pt-14 pb-8 px-6 flex flex-col items-center justify-center bg-white text-center select-none"
     >
       {/* Decorative Top Flourish Dot */}
       <motion.div

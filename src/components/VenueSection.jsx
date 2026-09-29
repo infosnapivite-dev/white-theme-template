@@ -41,7 +41,7 @@ export const VenueSection = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-40px" }}
-      className="relative w-full py-12 px-6 bg-white flex flex-col items-center justify-center text-center gpu-layer select-none"
+      className="relative w-full py-12 px-6 bg-white flex flex-col items-center justify-center text-center select-none"
     >
       {/* Cursive Header: Venue */}
       <motion.div variants={itemVariants} className="mb-3">

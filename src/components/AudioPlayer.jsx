@@ -102,19 +102,22 @@ export const AudioPlayer = () => {
               <Volume2 size={16} />
               <div className="flex items-end gap-[2px] h-3">
                 <motion.span
-                  animate={{ height: ['4px', '12px', '6px', '12px'] }}
+                  animate={{ scaleY: [0.3, 1, 0.5, 1] }}
                   transition={{ duration: 0.9, repeat: Infinity, ease: 'easeInOut' }}
-                  className="w-[2px] bg-white rounded-full"
+                  style={{ originY: 1 }}
+                  className="w-[2px] h-3 bg-white rounded-full"
                 />
                 <motion.span
-                  animate={{ height: ['10px', '4px', '12px', '6px'] }}
+                  animate={{ scaleY: [0.8, 0.3, 1, 0.5] }}
                   transition={{ duration: 0.7, repeat: Infinity, ease: 'easeInOut', delay: 0.2 }}
-                  className="w-[2px] bg-white rounded-full"
+                  style={{ originY: 1 }}
+                  className="w-[2px] h-3 bg-white rounded-full"
                 />
                 <motion.span
-                  animate={{ height: ['6px', '12px', '4px', '10px'] }}
+                  animate={{ scaleY: [0.5, 1, 0.3, 0.8] }}
                   transition={{ duration: 0.8, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
-                  className="w-[2px] bg-white rounded-full"
+                  style={{ originY: 1 }}
+                  className="w-[2px] h-3 bg-white rounded-full"
                 />
               </div>
             </motion.div>

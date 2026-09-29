@@ -54,7 +54,7 @@ export const FooterSection = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-30px" }}
-      className="relative w-full pt-8 pb-16 px-6 bg-white flex flex-col items-center justify-center text-center gpu-layer select-none"
+      className="relative w-full pt-8 pb-16 px-6 bg-white flex flex-col items-center justify-center text-center select-none"
     >
       {/* Calendar Export Button */}
       <motion.div variants={itemVariants} className="w-full max-w-[240px] mb-10">

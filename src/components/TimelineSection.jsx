@@ -84,7 +84,7 @@ export const TimelineSection = () => {
   };
 
   return (
-    <section className="relative w-full py-24 sm:py-28 px-7 min-h-[680px] flex flex-col justify-center bg-[#141415] text-white gpu-layer select-none overflow-hidden">
+    <section className="relative w-full py-24 sm:py-28 px-7 min-h-[680px] flex flex-col justify-center bg-[#141415] text-white select-none overflow-hidden">
       {/* Section Header: EVENTS */}
       <motion.div
         variants={headerVariants}
@@ -127,7 +127,7 @@ export const TimelineSection = () => {
           whileInView={{ scaleY: 1 }}
           viewport={{ once: true, margin: "-30px" }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute left-[5px] top-[10px] bottom-[10px] w-[1px] bg-neutral-700/80 origin-top gpu-layer"
+          className="absolute left-[5px] top-[10px] bottom-[10px] w-[1px] bg-neutral-700/80 origin-top"
         />
 
         {/* Staggered Event Items Container */}
@@ -145,7 +145,7 @@ export const TimelineSection = () => {
               whileHover={{ x: 4 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setSelectedEvent(event)}
-              className="relative flex items-center justify-between pl-8 pr-1 gpu-layer group cursor-pointer"
+              className="relative flex items-center justify-between pl-8 pr-1 group cursor-pointer"
             >
               {/* Hollow Circular Node Intersecting Track */}
               <div className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center justify-center">

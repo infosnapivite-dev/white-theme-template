@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
 // Target date: October 26, 2025, 15:00:00 CET
@@ -87,7 +87,7 @@ export const CountdownSection = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-40px" }}
-      className="relative w-full py-20 sm:py-24 px-6 min-h-[320px] bg-white flex flex-col items-center justify-center text-center gpu-layer select-none"
+      className="relative w-full py-20 sm:py-24 px-6 min-h-[320px] bg-white flex flex-col items-center justify-center text-center select-none"
     >
       {/* Introductory text */}
       <motion.p
@@ -111,19 +111,8 @@ export const CountdownSection = () => {
         {/* Numbers Row */}
         <div className="flex items-center justify-between font-serif-luxury text-[#1c1c1c] text-[42px] sm:text-[48px] font-light leading-none tracking-tight">
           {/* Days */}
-          <motion.div variants={digitVariants} className="w-[62px] text-center overflow-hidden">
-            <AnimatePresence mode="popLayout">
-              <motion.span
-                key={timeLeft.days}
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -10, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="block"
-              >
-                {timeLeft.days}
-              </motion.span>
-            </AnimatePresence>
+          <motion.div variants={digitVariants} className="w-[62px] h-[52px] flex items-center justify-center text-center overflow-hidden">
+            <span className="block">{timeLeft.days}</span>
           </motion.div>
 
           <motion.span
@@ -135,19 +124,8 @@ export const CountdownSection = () => {
           </motion.span>
 
           {/* Hours */}
-          <motion.div variants={digitVariants} className="w-[62px] text-center overflow-hidden">
-            <AnimatePresence mode="popLayout">
-              <motion.span
-                key={timeLeft.hours}
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -10, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="block"
-              >
-                {timeLeft.hours}
-              </motion.span>
-            </AnimatePresence>
+          <motion.div variants={digitVariants} className="w-[62px] h-[52px] flex items-center justify-center text-center overflow-hidden">
+            <span className="block">{timeLeft.hours}</span>
           </motion.div>
 
           <motion.span
@@ -159,19 +137,8 @@ export const CountdownSection = () => {
           </motion.span>
 
           {/* Minutes */}
-          <motion.div variants={digitVariants} className="w-[62px] text-center overflow-hidden">
-            <AnimatePresence mode="popLayout">
-              <motion.span
-                key={timeLeft.minutes}
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -10, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="block"
-              >
-                {timeLeft.minutes}
-              </motion.span>
-            </AnimatePresence>
+          <motion.div variants={digitVariants} className="w-[62px] h-[52px] flex items-center justify-center text-center overflow-hidden">
+            <span className="block">{timeLeft.minutes}</span>
           </motion.div>
 
           <motion.span
@@ -183,19 +150,8 @@ export const CountdownSection = () => {
           </motion.span>
 
           {/* Seconds */}
-          <motion.div variants={digitVariants} className="w-[62px] text-center overflow-hidden">
-            <AnimatePresence mode="popLayout">
-              <motion.span
-                key={timeLeft.seconds}
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -10, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="block text-[#1c1c1c]"
-              >
-                {timeLeft.seconds}
-              </motion.span>
-            </AnimatePresence>
+          <motion.div variants={digitVariants} className="w-[62px] h-[52px] flex items-center justify-center text-center overflow-hidden">
+            <span className="block text-[#1c1c1c]">{timeLeft.seconds}</span>
           </motion.div>
         </div>
 

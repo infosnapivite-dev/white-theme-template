@@ -51,7 +51,7 @@ export const HeroSection = () => {
   };
 
   return (
-    <section className="relative w-full pt-10 pb-8 px-6 flex flex-col justify-between min-h-[580px] bg-white gpu-layer select-none overflow-hidden">
+    <section className="relative w-full pt-10 pb-8 px-6 flex flex-col justify-between min-h-[580px] bg-white select-none overflow-hidden">
       {/* Pinned Header: Names with character animation */}
       <motion.div
         variants={headerVariants}
@@ -118,11 +118,14 @@ export const HeroSection = () => {
         >
           scroll to explore
         </motion.span>
-        <motion.div
-          animate={{ height: ['12px', '22px', '12px'], opacity: [0.3, 0.8, 0.3] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-[1px] bg-[#1c1c1c]/40 mt-2"
-        />
+        <div className="h-[22px] flex items-center justify-center mt-2">
+          <motion.div
+            animate={{ scaleY: [0.5, 1, 0.5], opacity: [0.3, 0.8, 0.3] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+            style={{ originY: 0 }}
+            className="w-[1px] h-[18px] bg-[#1c1c1c]/40"
+          />
+        </div>
       </motion.div>
     </section>
   );

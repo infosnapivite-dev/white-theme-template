@@ -20,14 +20,15 @@ export function App() {
       touchMultiplier: 2,
     });
 
+    let animId;
     const raf = (time) => {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      animId = requestAnimationFrame(raf);
     };
-    const animId = requestAnimationFrame(raf);
+    animId = requestAnimationFrame(raf);
 
     return () => {
-      cancelAnimationFrame(animId);
+      if (animId) cancelAnimationFrame(animId);
       lenis.destroy();
     };
   }, []);
@@ -35,7 +36,7 @@ export function App() {
   return (
     <div className="min-h-screen w-full bg-[#f6f4f0] flex justify-center selection:bg-[#222] selection:text-[#fff]">
       {/* Mobile-First Centered Container (native full width on mobile, elegant constrained column on desktop) */}
-      <main className="relative w-full max-w-[430px] min-h-screen bg-white shadow-[0_0_50px_rgba(0,0,0,0.06)] flex flex-col gpu-layer">
+      <main className="relative w-full max-w-[430px] min-h-screen bg-white shadow-[0_0_50px_rgba(0,0,0,0.06)] flex flex-col">
         {/* 1. Hero Section: Names header, Left cursive text, LOVE typographic lockup, Wedding date */}
         <HeroSection />
 
