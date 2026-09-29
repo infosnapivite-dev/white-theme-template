@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, VolumeX } from 'lucide-react';
 
 export const AudioPlayer = () => {
@@ -72,28 +73,64 @@ export const AudioPlayer = () => {
   }, []);
 
   return (
-    <button
-      onClick={toggleMusic}
-      title={isPlaying ? 'Mute ambient sound' : 'Play ambient romantic soundtrack'}
-      className={`fixed bottom-6 right-6 z-40 p-3 rounded-full shadow-lg border backdrop-blur-md transition-all duration-300 flex items-center justify-center cursor-pointer ${
-        isPlaying
-          ? 'bg-neutral-900 text-white border-neutral-700 ring-2 ring-neutral-400/30'
-          : 'bg-white/80 text-neutral-700 border-neutral-200 hover:bg-white'
-      }`}
+    <motion.div
+      initial={{ scale: 0, opacity: 0, y: 20 }}
+      animate={{ scale: 1, opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="fixed bottom-6 right-6 z-40"
     >
-      {isPlaying ? (
-        <div className="flex items-center gap-1.5 px-0.5">
-          <Volume2 size={16} className="animate-pulse" />
-          <div className="flex items-end gap-[2px] h-3">
-            <span className="w-[2px] h-3 bg-white animate-bounce" style={{ animationDuration: '0.6s' }}></span>
-            <span className="w-[2px] h-2 bg-white animate-bounce" style={{ animationDuration: '0.8s', animationDelay: '0.2s' }}></span>
-            <span className="w-[2px] h-3 bg-white animate-bounce" style={{ animationDuration: '0.5s', animationDelay: '0.4s' }}></span>
-          </div>
-        </div>
-      ) : (
-        <VolumeX size={16} />
-      )}
-    </button>
+      <motion.button
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.92 }}
+        onClick={toggleMusic}
+        title={isPlaying ? 'Mute ambient sound' : 'Play ambient romantic soundtrack'}
+        className={`p-3 rounded-full shadow-lg border backdrop-blur-md transition-colors duration-300 flex items-center justify-center cursor-pointer ${
+          isPlaying
+            ? 'bg-neutral-900 text-white border-neutral-700 ring-2 ring-neutral-400/30'
+            : 'bg-white/85 text-neutral-700 border-neutral-200 hover:bg-white'
+        }`}
+      >
+        <AnimatePresence mode="wait">
+          {isPlaying ? (
+            <motion.div
+              key="playing"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="flex items-center gap-1.5 px-0.5"
+            >
+              <Volume2 size={16} />
+              <div className="flex items-end gap-[2px] h-3">
+                <motion.span
+                  animate={{ height: ['4px', '12px', '6px', '12px'] }}
+                  transition={{ duration: 0.9, repeat: Infinity, ease: 'easeInOut' }}
+                  className="w-[2px] bg-white rounded-full"
+                />
+                <motion.span
+                  animate={{ height: ['10px', '4px', '12px', '6px'] }}
+                  transition={{ duration: 0.7, repeat: Infinity, ease: 'easeInOut', delay: 0.2 }}
+                  className="w-[2px] bg-white rounded-full"
+                />
+                <motion.span
+                  animate={{ height: ['6px', '12px', '4px', '10px'] }}
+                  transition={{ duration: 0.8, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+                  className="w-[2px] bg-white rounded-full"
+                />
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="muted"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+            >
+              <VolumeX size={16} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.button>
+    </motion.div>
   );
 };
 

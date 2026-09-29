@@ -48,26 +48,36 @@ const timelineEvents = [
 export const TimelineSection = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
-  // Container animation variants
+  // Section header variants
+  const headerVariants = {
+    hidden: { opacity: 0, y: -15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
+  // Container animation variants for items
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.18,
-        delayChildren: 0.2,
+        staggerChildren: 0.16,
+        delayChildren: 0.25,
       },
     },
   };
 
   // Node item animation variants
   const itemVariants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, x: -15 },
     visible: {
       opacity: 1,
-      y: 0,
+      x: 0,
       transition: {
-        duration: 0.65,
+        duration: 0.7,
         ease: [0.16, 1, 0.3, 1],
       },
     },
@@ -76,12 +86,14 @@ export const TimelineSection = () => {
   return (
     <section className="relative w-full py-24 sm:py-28 px-7 min-h-[680px] flex flex-col justify-center bg-[#141415] text-white gpu-layer select-none overflow-hidden">
       {/* Section Header: EVENTS */}
-      <div className="flex flex-col items-center justify-center mb-16">
+      <motion.div
+        variants={headerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-40px" }}
+        className="flex flex-col items-center justify-center mb-16"
+      >
         <motion.h2
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="font-serif-luxury text-[18px] sm:text-[20px] tracking-[0.3em] text-white uppercase font-light text-center"
         >
           EVENTS
@@ -97,15 +109,15 @@ export const TimelineSection = () => {
         />
 
         <motion.span
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 5 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-[10.5px] uppercase tracking-[0.2em] text-neutral-500 font-light mt-2"
+          transition={{ duration: 0.8, delay: 0.35 }}
+          className="text-[10.5px] uppercase tracking-[0.2em] text-neutral-400 font-light mt-2"
         >
           tap any event for details
         </motion.span>
-      </div>
+      </motion.div>
 
       {/* Timeline Interactive Track & Nodes */}
       <div className="relative w-full max-w-[340px] mx-auto py-2">
@@ -130,12 +142,20 @@ export const TimelineSection = () => {
             <motion.div
               key={event.id}
               variants={itemVariants}
+              whileHover={{ x: 4 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => setSelectedEvent(event)}
               className="relative flex items-center justify-between pl-8 pr-1 gpu-layer group cursor-pointer"
             >
               {/* Hollow Circular Node Intersecting Track */}
               <div className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center justify-center">
-                <div className="w-[12px] h-[12px] rounded-full border-[1.5px] border-white/90 bg-[#141415] transition-all duration-300 group-hover:scale-130 group-hover:border-white group-hover:bg-white" />
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="w-[12px] h-[12px] rounded-full border-[1.5px] border-white/90 bg-[#141415] transition-all duration-300 group-hover:scale-130 group-hover:border-white group-hover:bg-white"
+                />
               </div>
 
               {/* Event Title (Left Column) */}
@@ -172,22 +192,29 @@ export const TimelineSection = () => {
 
             {/* Modal Card */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.94, y: 15 }}
+              initial={{ opacity: 0, scale: 0.92, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.94, y: 15 }}
+              exit={{ opacity: 0, scale: 0.92, y: 20 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               className="relative w-full max-w-[340px] bg-[#1a1a1c] border border-neutral-700/70 p-6 rounded-[2px] shadow-2xl z-10 text-left"
             >
               {/* Close Button */}
-              <button
+              <motion.button
+                whileHover={{ rotate: 90, scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={() => setSelectedEvent(null)}
                 className="absolute top-4 right-4 p-1.5 text-neutral-400 hover:text-white transition-colors rounded-full hover:bg-neutral-800 cursor-pointer"
               >
                 <X size={16} />
-              </button>
+              </motion.button>
 
               {/* Time & Location Badge */}
-              <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.16em] text-neutral-400 mb-3 font-light">
+              <motion.div
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="flex items-center gap-3 text-[11px] uppercase tracking-[0.16em] text-neutral-400 mb-3 font-light"
+              >
                 <span className="flex items-center gap-1 text-white">
                   <Clock size={12} className="text-neutral-300" />
                   {selectedEvent.time}
@@ -197,33 +224,50 @@ export const TimelineSection = () => {
                   <MapPin size={12} className="text-neutral-300" />
                   {selectedEvent.location}
                 </span>
-              </div>
+              </motion.div>
 
               {/* Title */}
-              <h3 className="font-serif-luxury text-[22px] sm:text-[24px] text-white font-light tracking-wide leading-tight mb-3">
+              <motion.h3
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 }}
+                className="font-serif-luxury text-[22px] sm:text-[24px] text-white font-light tracking-wide leading-tight mb-3"
+              >
                 {selectedEvent.title}
-              </h3>
+              </motion.h3>
 
               {/* Description */}
-              <p className="text-[13px] sm:text-[13.5px] text-neutral-300 font-light leading-relaxed mb-5">
+              <motion.p
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-[13px] sm:text-[13.5px] text-neutral-300 font-light leading-relaxed mb-5"
+              >
                 {selectedEvent.description}
-              </p>
+              </motion.p>
 
               {/* Recommended Attire Note */}
-              <div className="pt-3.5 border-t border-neutral-800/80 flex items-start gap-2">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.25 }}
+                className="pt-3.5 border-t border-neutral-800/80 flex items-start gap-2"
+              >
                 <Sparkles size={13} className="text-neutral-400 mt-0.5 shrink-0" />
                 <div className="text-[11.5px] font-light text-neutral-400">
                   <span className="text-neutral-200">Recommended Attire:</span> {selectedEvent.attire}
                 </div>
-              </div>
+              </motion.div>
 
               {/* Close Action */}
-              <button
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedEvent(null)}
                 className="mt-6 w-full py-2.5 bg-neutral-800 hover:bg-neutral-700 text-white text-[11.5px] uppercase tracking-[0.18em] font-light transition-all rounded-[1px] cursor-pointer"
               >
                 Close
-              </button>
+              </motion.button>
             </motion.div>
           </div>
         )}

@@ -2,8 +2,38 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 export const DateMotif = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const numberVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.9,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
+
   return (
-    <div className="relative w-full max-w-[240px] mx-auto py-6 flex flex-col items-center justify-center select-none gpu-layer">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-40px" }}
+      className="relative w-full max-w-[240px] mx-auto py-4 flex flex-col items-center justify-center select-none gpu-layer"
+    >
       <svg
         viewBox="0 0 260 380"
         fill="none"
@@ -13,6 +43,7 @@ export const DateMotif = () => {
       >
         {/* Number 26 */}
         <motion.text
+          variants={numberVariants}
           x="30"
           y="130"
           fontFamily="'Bodoni Moda', 'Playfair Display', serif"
@@ -20,16 +51,13 @@ export const DateMotif = () => {
           fontWeight="400"
           fill="#1c1c1c"
           letterSpacing="-0.08em"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           26
         </motion.text>
 
         {/* Number 10 - offset slightly right */}
         <motion.text
+          variants={numberVariants}
           x="120"
           y="235"
           fontFamily="'Bodoni Moda', 'Playfair Display', serif"
@@ -37,16 +65,13 @@ export const DateMotif = () => {
           fontWeight="300"
           fill="#1c1c1c"
           letterSpacing="-0.08em"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         >
           10
         </motion.text>
 
         {/* Number 25 - below 26, offset left/center */}
         <motion.text
+          variants={numberVariants}
           x="45"
           y="340"
           fontFamily="'Bodoni Moda', 'Playfair Display', serif"
@@ -54,15 +79,11 @@ export const DateMotif = () => {
           fontWeight="400"
           fill="#1c1c1c"
           letterSpacing="-0.08em"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
           25
         </motion.text>
       </svg>
-    </div>
+    </motion.div>
   );
 };
 
